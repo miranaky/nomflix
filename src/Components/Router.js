@@ -12,7 +12,7 @@ import Detail from "Routes/Detail";
 import Header from "Components/Header";
 
 export default () => (
-  <Router basename={"https://optimistic-lewin-c5258a.netlify.app"}>
+  <Router>
     <>
       <Header />
       <Switch>
