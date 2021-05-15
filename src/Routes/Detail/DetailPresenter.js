@@ -68,7 +68,7 @@ const Overview = styled.p`
   font-size: 13px;
   opacity: 0.7;
   line-height: 1.5;
-  width: 60%;
+  width: 70%;
 `;
 
 const DetailPresenter = ({ result, error, loading }) =>

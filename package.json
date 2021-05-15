@@ -29,6 +29,7 @@
       "react-app/jest"
     ]
   },
+  "homepage": "https://optimistic-lewin-c5258a.netlify.app/",
   "browserslist": {
     "production": [
       ">0.2%",
