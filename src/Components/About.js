@@ -35,7 +35,7 @@ const AboutTabButton = styled.div`
 `;
 const AboutContents = styled.div`
   margin-top: 25px;
-  padding: 0px 20px;
+  padding: 0px 10px;
   height: 70%;
   width: 100%;
   font-size: 13px;
@@ -50,9 +50,10 @@ const SeasonsContainer = styled.div`
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  padding: 10px 20px;
 `;
 const Season = styled.div`
-  margin-right: 30px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -81,9 +82,10 @@ const CompaniesContainer = styled.div`
   flex-wrap: nowrap;
   overflow-x: scroll;
   align-items: center;
+  padding: 10px 20px;
 `;
 const Company = styled.div`
-  margin-right: 30px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,11 +108,13 @@ const CompanyImage = styled.div`
 const CountriesContainer = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
   align-items: center;
+  padding: 10px 20px;
 `;
 const Country = styled.div`
-  margin-right: 10px;
+  margin-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -128,6 +132,12 @@ const CountryImage = styled.div`
 `;
 const CountryName = styled.span`
   margin-top: 20px;
+`;
+
+const NotFound = styled.span`
+  margin: 20px;
+  font-size: 30px;
+  font-weight: 600;
 `;
 
 const About = ({ seasons, companies, countries }) => {
@@ -150,7 +160,7 @@ const About = ({ seasons, companies, countries }) => {
         ))}
       </SeasonsContainer>
     ) : (
-      <span>Not Found!</span>
+      <NotFound>No information yet!</NotFound>
     ),
   };
   const allTabs = [
@@ -173,7 +183,7 @@ const About = ({ seasons, companies, countries }) => {
           ))}
         </CompaniesContainer>
       ) : (
-        <span>Not Found!</span>
+        <NotFound>No information yet!</NotFound>
       ),
     },
     {
@@ -192,7 +202,7 @@ const About = ({ seasons, companies, countries }) => {
         </CountriesContainer>
       ) : (
         // <span>{countries[0].name}</span>
-        <span>Not Found!</span>
+        <NotFound>No information yet!</NotFound>
       ),
     },
   ];

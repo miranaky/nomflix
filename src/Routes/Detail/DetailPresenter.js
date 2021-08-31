@@ -56,7 +56,7 @@ const Title = styled.h3`
 `;
 
 const ItemContainer = styled.div`
-  font-size: 15px;
+  font-size: 17px;
   margin: 20px 0px;
 `;
 
@@ -67,7 +67,7 @@ const Divider = styled.span`
 `;
 
 const Overview = styled.p`
-  font-size: 13px;
+  font-size: 15px;
   opacity: 0.7;
   line-height: 1.5;
   width: 65%;
