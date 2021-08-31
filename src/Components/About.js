@@ -12,6 +12,7 @@ const AboutContainer = styled.div`
   border-radius: 15px;
   margin-top: 10vh;
 `;
+
 const AboutTabContainer = styled.div`
   height: 15%;
   margin: 10px 0px;
@@ -130,32 +131,31 @@ const CountryName = styled.span`
 `;
 
 const About = ({ seasons, companies, countries }) => {
-  console.log(countries);
+  const seasonInfo = {
+    index: 2,
+    tab: "Season Info",
+    data: seasons ? (
+      <SeasonsContainer>
+        {seasons.map((season) => (
+          <Season key={season.id}>
+            <SeasonImage
+              bgUrl={
+                season.poster_path
+                  ? `https://image.tmdb.org/t/p/w300${season.poster_path}`
+                  : require("../asset/noPosterSmall.png").default
+              }
+            />
+            <SeasonName>{season.name}</SeasonName>
+          </Season>
+        ))}
+      </SeasonsContainer>
+    ) : (
+      <span>Not Found!</span>
+    ),
+  };
   const allTabs = [
     {
       index: 0,
-      tab: "Season Info",
-      data: seasons ? (
-        <SeasonsContainer>
-          {seasons.map((season) => (
-            <Season key={season.id}>
-              <SeasonImage
-                bgUrl={
-                  season.poster_path
-                    ? `https://image.tmdb.org/t/p/w300${season.poster_path}`
-                    : require("../asset/noPosterSmall.png").default
-                }
-              />
-              <SeasonName>{season.name}</SeasonName>
-            </Season>
-          ))}
-        </SeasonsContainer>
-      ) : (
-        <span>Not Found!</span>
-      ),
-    },
-    {
-      index: 1,
       tab: "Created by Info",
       data: companies ? (
         <CompaniesContainer>
@@ -177,7 +177,7 @@ const About = ({ seasons, companies, countries }) => {
       ),
     },
     {
-      index: 2,
+      index: 1,
       tab: "Country Info",
       data: countries ? (
         <CountriesContainer>
@@ -196,6 +196,10 @@ const About = ({ seasons, companies, countries }) => {
       ),
     },
   ];
+
+  if (seasons) {
+    allTabs.push(seasonInfo);
+  }
   const { currentItem, changeItem } = useTabs(0, allTabs);
 
   return (

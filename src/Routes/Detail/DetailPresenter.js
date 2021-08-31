@@ -164,7 +164,6 @@ const DetailPresenter = ({ result, error, loading }) => {
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-          {console.log(result.production_companies.length)}
           <About
             seasons={result.seasons}
             companies={
