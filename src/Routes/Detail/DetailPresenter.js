@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Helmet from "react-helmet";
 import Loader from "Components/Loader";
+import { useTabs } from "hooks";
+import About from "Components/About";
 
 const Container = styled.div`
   width: 100%;
@@ -68,11 +70,19 @@ const Overview = styled.p`
   font-size: 13px;
   opacity: 0.7;
   line-height: 1.5;
-  width: 70%;
+  width: 65%;
+`;
+const IMDB = styled.span`
+  margin-top: 10px;
+  padding: 2px;
+  border: solid orange 2px;
+  border-radius: 2px;
 `;
 
-const DetailPresenter = ({ result, error, loading }) =>
-  loading ? (
+const IMDBLink = styled.a``;
+
+const DetailPresenter = ({ result, error, loading }) => {
+  return loading ? (
     <>
       <Helmet>
         <title>Loading | Nomflix</title>
@@ -111,10 +121,14 @@ const DetailPresenter = ({ result, error, loading }) =>
           <ItemContainer>
             <Item>
               {result.release_date
-                ? result.release_date.substring(0, 4)
-                : result.first_air_date.substring(0, 4)}
+                ? result.release_date?.substring(0, 4)
+                : result.first_air_date?.substring(0, 4)}
             </Item>
-            <Divider>·</Divider>
+            {result.release_date || result.first_air_date ? (
+              <Divider>·</Divider>
+            ) : (
+              ""
+            )}
             <Item>
               {result.runtime ? result.runtime : result.episode_run_time} min
             </Item>
@@ -131,13 +145,40 @@ const DetailPresenter = ({ result, error, loading }) =>
             <Item>Language - {result.original_language}</Item>
             <Divider>·</Divider>
             <Item>⭐️ {result.vote_average}</Item>
+            <Item>
+              {result.imdb_id ? (
+                <>
+                  <Divider>·</Divider>
+
+                  <IMDB>
+                    <IMDBLink
+                      href={`https://www.imdb.com/title/${result.imdb_id}/`}
+                    >
+                      IMDB
+                    </IMDBLink>
+                  </IMDB>
+                </>
+              ) : (
+                ""
+              )}
+            </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          {console.log(result.production_companies.length)}
+          <About
+            seasons={result.seasons}
+            companies={
+              result.production_companies.length > 0
+                ? result.production_companies
+                : null
+            }
+            countries={result.production_countries}
+          />
         </Data>
       </Content>
     </Container>
   );
-
+};
 DetailPresenter.propTypes = {
   result: PropTypes.object,
   error: PropTypes.string,
